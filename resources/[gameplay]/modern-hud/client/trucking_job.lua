@@ -14,6 +14,12 @@ local truckingJob = {
 }
 
 -- ==============================
+-- CURSOR VEZÉRLÉS
+-- ==============================
+local cursorMode = false
+local cursorToggleEnabled = true
+
+-- ==============================
 -- KOORDINÁTÁK
 -- ==============================
 local jobLocations = {
@@ -109,6 +115,107 @@ local currentDialogue = ""
 local dialogueTimer = 0
 
 -- ==============================
+-- BILLENTYŰ KEZELÉS - CURSOR TOGGLE
+-- ==============================
+addEventHandler("onClientKey", root, function(key, press)
+    if not press then return end
+    
+    -- M billentyű - Cursor ki/be kapcsolás
+    if key == "m" and cursorToggleEnabled then
+        toggleCursorMode()
+    end
+    
+    -- F billentyű - NPC interakció VAGY jármű beszállás
+    if key == "f" then
+        checkNPCInteraction()
+    end
+    
+    -- ENTER billentyű - Jármű beszállás (alternatív)
+    if key == "enter" then
+        checkVehicleEntry()
+    end
+    
+    -- ESC billentyű - Cursor kikapcsolás és panelek bezárása
+    if key == "escape" then
+        if cursorMode then
+            disableCursorMode()
+        end
+        if showPanel then
+            hideTruckSelectionPanel()
+        end
+    end
+end)
+
+-- ==============================
+-- NPC INTERAKCIÓ ELLENŐRZÉS (F BILLENTYŰ) - JAVÍTOTT
+-- ==============================
+function checkNPCInteraction()
+    local playerX, playerY, playerZ = getElementPosition(localPlayer)
+    
+    -- Először ellenőrizzük, van-e közelben kamion (prioritás)
+    if truckingJob.currentTruck and isElement(truckingJob.currentTruck) then
+        local truckX, truckY, truckZ = getElementPosition(truckingJob.currentTruck)
+        local truckDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, truckX, truckY, truckZ)
+        
+        if truckDist < 5 and not isPedInVehicle(localPlayer) then
+            outputChatBox("🚛 Beszállás a kamionba...", 10, 126, 18)
+            warpPedIntoVehicle(localPlayer, truckingJob.currentTruck)
+            return
+        end
+    end
+    
+    -- Ha nincs kamion közelben, akkor NPC interakció
+    local npcDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, jobLocations.npc.x, jobLocations.npc.y, jobLocations.npc.z)
+    
+    outputChatBox("🔍 DEBUG: Távolság az NPC-től: " .. math.floor(npcDist) .. " méter", 255, 255, 0)
+    outputChatBox("🔍 DEBUG: Jelenlegi stage: " .. truckingJob.stage, 255, 255, 0)
+    
+    if npcDist < 8 then
+        if truckingJob.stage == "idle" then
+            showTruckSelectionPanel()
+            outputChatBox("👨‍💼 NPC: Válassz egy kamion típust a munkához!", 10, 126, 18)
+        else
+            outputChatBox("👨‍💼 NPC: " .. currentDialogue, 10, 126, 18)
+        end
+    else
+        outputChatBox("❌ Túl messze vagy az NPC-től! (Minimum 8 méter)", 255, 100, 100)
+        outputChatBox("💡 Vagy menj közel egy kamionhoz a beszálláshoz!", 255, 165, 0)
+    end
+end
+
+-- ==============================
+-- CURSOR MÓDOK KEZELÉSE
+-- ==============================
+function toggleCursorMode()
+    cursorMode = not cursorMode
+    showCursor(cursorMode)
+    
+    if cursorMode then
+        outputChatBox("🖱️ Cursor mód BEKAPCSOLVA - Kattinthatsz az NPC-re!", 10, 126, 18)
+        outputChatBox("💡 ESC vagy M billentyűvel kikapcsolható", 255, 255, 0)
+        outputChatBox("🔧 DEBUG: Cursor állapot = " .. tostring(cursorMode), 255, 255, 0)
+    else
+        outputChatBox("🖱️ Cursor mód KIKAPCSOLVA", 255, 100, 100)
+        -- Panel bezárása ha nyitva van
+        if showPanel then
+            hideTruckSelectionPanel()
+        end
+    end
+end
+
+function enableCursorMode()
+    cursorMode = true
+    showCursor(true)
+    outputChatBox("🖱️ Cursor mód aktiválva", 10, 126, 18)
+end
+
+function disableCursorMode()
+    cursorMode = false
+    showCursor(false)
+    outputChatBox("🖱️ Cursor mód kikapcsolva", 255, 100, 100)
+end
+
+-- ==============================
 -- NPC ÉS MARKEREK LÉTREHOZÁSA
 -- ==============================
 addEventHandler("onClientResourceStart", resourceRoot, function()
@@ -118,6 +225,14 @@ addEventHandler("onClientResourceStart", resourceRoot, function()
     setElementFrozen(truckingNPC, true)
     setElementData(truckingNPC, "trucking_npc", true)
     setElementData(truckingNPC, "clickable", true)
+    
+    -- DEBUG: NPC létrehozás ellenőrzése
+    if truckingNPC then
+        outputChatBox("✅ DEBUG: NPC sikeresen létrehozva!", 10, 126, 18)
+        outputChatBox("📍 DEBUG: NPC pozíció: " .. jobLocations.npc.x .. ", " .. jobLocations.npc.y .. ", " .. jobLocations.npc.z, 255, 255, 0)
+    else
+        outputChatBox("❌ DEBUG: NPC létrehozása sikertelen!", 255, 100, 100)
+    end
     
     -- CSAK MUNKÁHOZ SZÜKSÉGES MARKEREK (nem zavaró)
     createMarker(jobLocations.loading.x, jobLocations.loading.y, jobLocations.loading.z - 1, "cylinder", 4.0, 255, 165, 0, 120)
@@ -130,7 +245,8 @@ addEventHandler("onClientResourceStart", resourceRoot, function()
     setTimer(updateNPCDialogue, 5000, 0) -- 5 másodpercenként új beszéd
     
     outputChatBox("🚛 Kamionos munka rendszer betöltve!", 10, 126, 18)
-    outputChatBox("💡 Menj az NPC-hez és kattints rá a munkához!", 255, 255, 0)
+    outputChatBox("💡 F = NPC/Kamion | ENTER = Kamion | M = Cursor", 255, 255, 0)
+    outputChatBox("🖱️ Cursor móddal kattinthatsz az NPC-re!", 10, 126, 18)
 end)
 
 -- ==============================
@@ -157,15 +273,73 @@ function updateNPCDialogue()
 end
 
 -- ==============================
--- NPC KATTINTÁS KEZELÉS
+-- NPC KATTINTÁS KEZELÉS (JAVÍTOTT DEBUG-GAL)
 -- ==============================
 addEventHandler("onClientElementClicked", root, function(button, state, player)
+    outputChatBox("🔍 DEBUG: Kattintás esemény aktiválódott!", 255, 255, 0)
+    
     if button == "left" and state == "down" and player == localPlayer then
-        if source == truckingNPC then
+        outputChatBox("🔍 DEBUG: Bal egérgomb lenyomva!", 255, 255, 0)
+        
+        if source then
+            outputChatBox("🔍 DEBUG: Kattintott elem típusa: " .. getElementType(source), 255, 255, 0)
+            
+            if source == truckingNPC then
+                outputChatBox("🔍 DEBUG: NPC-re kattintás észlelve!", 10, 126, 18)
+                
+                -- Ellenőrizzük hogy cursor mód aktív-e
+                if not cursorMode then
+                    outputChatBox("💡 Nyomd meg az M billentyűt a cursor módhoz!", 255, 255, 0)
+                    outputChatBox("💡 Vagy használd az F billentyűt közvetlen interakcióhoz!", 255, 165, 0)
+                    return
+                end
+                
+                local playerX, playerY, playerZ = getElementPosition(localPlayer)
+                local npcDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, jobLocations.npc.x, jobLocations.npc.y, jobLocations.npc.z)
+                
+                outputChatBox("🔍 DEBUG: Távolság NPC-től: " .. math.floor(npcDist) .. " méter", 255, 255, 0)
+                
+                if npcDist < 8 then
+                    outputChatBox("🔍 DEBUG: Távolság OK, stage ellenőrzés...", 255, 255, 0)
+                    
+                    if truckingJob.stage == "idle" then
+                        outputChatBox("🔍 DEBUG: Stage idle, panel megnyitása...", 255, 255, 0)
+                        showTruckSelectionPanel()
+                        outputChatBox("👨‍💼 NPC: Válassz egy kamion típust a munkához!", 10, 126, 18)
+                    else
+                        outputChatBox("👨‍💼 NPC: " .. currentDialogue, 10, 126, 18)
+                    end
+                else
+                    outputChatBox("❌ Menj közelebb az NPC-hez! (Jelenleg: " .. math.floor(npcDist) .. " méter)", 255, 100, 100)
+                end
+            else
+                outputChatBox("🔍 DEBUG: Nem NPC-re kattintottál", 255, 255, 0)
+            end
+        else
+            outputChatBox("🔍 DEBUG: Nincs kattintott elem", 255, 255, 0)
+        end
+    end
+end)
+
+-- ==============================
+-- ALTERNATÍV NPC KATTINTÁS (MINDEN ELEMHEZ)
+-- ==============================
+addEventHandler("onClientClick", root, function(button, state, absoluteX, absoluteY, worldX, worldY, worldZ, clickedElement)
+    if button == "left" and state == "down" then
+        outputChatBox("🔍 DEBUG: onClientClick aktiválódott!", 255, 255, 0)
+        
+        if clickedElement and clickedElement == truckingNPC then
+            outputChatBox("🔍 DEBUG: NPC kattintás onClientClick-kel!", 10, 126, 18)
+            
+            if not cursorMode then
+                outputChatBox("💡 Nyomd meg az M billentyűt a cursor módhoz!", 255, 255, 0)
+                return
+            end
+            
             local playerX, playerY, playerZ = getElementPosition(localPlayer)
             local npcDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, jobLocations.npc.x, jobLocations.npc.y, jobLocations.npc.z)
             
-            if npcDist < 5 then
+            if npcDist < 8 then
                 if truckingJob.stage == "idle" then
                     showTruckSelectionPanel()
                     outputChatBox("👨‍💼 NPC: Válassz egy kamion típust a munkához!", 10, 126, 18)
@@ -220,6 +394,8 @@ end
 function drawTruckSelectionPanel()
     local panel = guiConfig.panel
     local colors = guiConfig.colors
+    
+    outputChatBox("🔍 DEBUG: Panel rajzolása megkezdődött!", 255, 255, 0)
     
     -- Fő panel háttér
     drawRoundedRectangle(panel.x, panel.y, panel.width, panel.height, 15, tocolor(unpack(colors.background)))
@@ -285,6 +461,116 @@ function drawTruckSelectionPanel()
         wasMousePressed = true
     end
 end
+
+-- ==============================
+-- GUI VEZÉRLÉS (JAVÍTOTT)
+-- ==============================
+local showPanel = false
+local wasMousePressed = false
+
+function showTruckSelectionPanel()
+    showPanel = true
+    truckingJob.active = true
+    enableCursorMode() -- Automatikusan bekapcsoljuk a cursor módot
+    outputChatBox("🔍 DEBUG: Panel megnyitva, showPanel = " .. tostring(showPanel), 255, 255, 0)
+end
+
+function hideTruckSelectionPanel()
+    showPanel = false
+    disableCursorMode() -- Automatikusan kikapcsoljuk a cursor módot
+    outputChatBox("🔍 DEBUG: Panel bezárva, showPanel = " .. tostring(showPanel), 255, 255, 0)
+end
+
+function isMouseInPosition(x, y, width, height)
+    if not isCursorShowing() then return false end
+    local cx, cy = getCursorPosition()
+    cx, cy = cx * screenWidth, cy * screenHeight
+    return cx >= x and cx <= x + width and cy >= y and cy <= y + height
+end
+
+-- ==============================
+-- SEGÉD FUNKCIÓK
+-- ==============================
+function formatNumber(num)
+    local formatted = tostring(num)
+    local k
+    while true do
+        formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
+        if k == 0 then break end
+    end
+    return formatted
+end
+
+-- ==============================
+-- RENDERELÉS (JAVÍTOTT)
+-- ==============================
+addEventHandler("onClientRender", root, function()
+    if showPanel then
+        drawTruckSelectionPanel()
+    end
+    
+    drawLoadingProgress()
+    drawCursorModeIndicator() -- Cursor mód kijelző
+    
+    -- Mouse pressed state reset
+    if not getKeyState("mouse1") then
+        wasMousePressed = false
+    end
+end)
+
+-- ==============================
+-- 3D SZÖVEGEK ÉS KOMMUNIKÁCIÓ (JAVÍTOTT)
+-- ==============================
+addEventHandler("onClientRender", root, function()
+    local playerX, playerY, playerZ = getElementPosition(localPlayer)
+    
+    -- NPC kommunikáció és interakció
+    local npcDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, jobLocations.npc.x, jobLocations.npc.y, jobLocations.npc.z)
+    if npcDist < 15 then
+        -- NPC neve és alapinfó
+        dxDrawText3D("👨‍💼 TEJSZÁLLÍTÓ FŐNÖK\n💼 M = Cursor | F = Interakció", 
+            jobLocations.npc.x, jobLocations.npc.y, jobLocations.npc.z + 1.2, 15, tocolor(10, 126, 18, 255))
+        
+        -- Folyamatos beszélgetés
+        if currentDialogue ~= "" and npcDist < 8 then
+            dxDrawText3D("💬 \"" .. currentDialogue .. "\"", 
+                jobLocations.npc.x, jobLocations.npc.y, jobLocations.npc.z + 2.0, 12, tocolor(255, 255, 255, 255))
+        end
+    end
+    
+    -- Felrakodó hely szöveg
+    if truckingJob.stage == "selected" then
+        local loadDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, jobLocations.loading.x, jobLocations.loading.y, jobLocations.loading.z)
+        if loadDist < 15 then
+            dxDrawText3D("📦 FELRAKODÓ RAKTÁR\n🥛 Hajts ide a kamionnal", 
+                jobLocations.loading.x, jobLocations.loading.y, jobLocations.loading.z + 1.5, 20, tocolor(255, 165, 0, 255))
+        end
+    end
+    
+    -- Szállítási hely szöveg
+    if truckingJob.stage == "delivering" then
+        local deliveryDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, jobLocations.delivery.x, jobLocations.delivery.y, jobLocations.delivery.z)
+        if deliveryDist < 15 then
+            dxDrawText3D("🏪 CÉLÁLLOMÁS\n💰 Szállítsd le a tejeket", 
+                jobLocations.delivery.x, jobLocations.delivery.y, jobLocations.delivery.z + 1.5, 20, tocolor(255, 50, 50, 255))
+        end
+    end
+    
+    -- Kamion helyzet mutatása
+    if truckingJob.currentTruck and isElement(truckingJob.currentTruck) and truckingJob.stage == "selected" then
+        local truckX, truckY, truckZ = getElementPosition(truckingJob.currentTruck)
+        local truckDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, truckX, truckY, truckZ)
+        if truckDist < 15 then
+            if not isPedInVehicle(localPlayer) then
+                dxDrawText3D("🚛 KAMIONOD\n🔑 F vagy ENTER = Beszállás", 
+                    truckX, truckY, truckZ + 1.5, 15, tocolor(255, 255, 0, 255))
+            else
+                dxDrawText3D("🚛 KAMIONOD\n✅ Bent vagy! Indulj!", 
+                    truckX, truckY, truckZ + 1.5, 15, tocolor(10, 126, 18, 255))
+            end
+        end
+    end
+end)
 
 -- ==============================
 -- KAMION SPAWN RENDSZER (JAVÍTOTT)
@@ -399,6 +685,51 @@ function drawLoadingProgress()
 end
 
 -- ==============================
+-- CURSOR MÓD KIJELZŐ (JAVÍTOTT)
+-- ==============================
+function drawCursorModeIndicator()
+    if cursorMode then
+        local indicatorX = 20
+        local indicatorY = screenHeight - 100
+        local indicatorW = 220
+        local indicatorH = 70
+        
+        -- Háttér
+        drawRoundedRectangle(indicatorX, indicatorY, indicatorW, indicatorH, 8, tocolor(10, 126, 18, 200))
+        
+        -- Szöveg
+        dxDrawText("🖱️ CURSOR MÓD AKTÍV", indicatorX, indicatorY, indicatorX + indicatorW, indicatorY + 25, 
+            tocolor(255, 255, 255, 255), 0.8, "default-bold", "center", "center")
+        dxDrawText("ESC/M = Ki | F/ENTER = Jármű", indicatorX, indicatorY + 25, indicatorX + indicatorW, indicatorY + 45, 
+            tocolor(200, 200, 200, 255), 0.7, "default", "center", "center")
+        dxDrawText("Kattints az NPC-re!", indicatorX, indicatorY + 45, indicatorX + indicatorW, indicatorY + indicatorH, 
+            tocolor(255, 255, 0, 255), 0.7, "default-bold", "center", "center")
+    else
+        -- Hint amikor nincs cursor mód
+        local playerX, playerY, playerZ = getElementPosition(localPlayer)
+        local npcDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, jobLocations.npc.x, jobLocations.npc.y, jobLocations.npc.z)
+        
+        if npcDist < 10 and truckingJob.stage == "idle" then
+            local hintX = 20
+            local hintY = screenHeight - 80
+            local hintW = 280
+            local hintH = 60
+            
+            -- Háttér
+            drawRoundedRectangle(hintX, hintY, hintW, hintH, 8, tocolor(255, 165, 0, 200))
+            
+            -- Szöveg
+            dxDrawText("💡 F = NPC/Jármű | ENTER = Jármű", hintX, hintY, hintX + hintW, hintY + 20, 
+                tocolor(255, 255, 255, 255), 0.8, "default-bold", "center", "center")
+            dxDrawText("M = Cursor mód aktiválás", hintX, hintY + 20, hintX + hintW, hintY + 40, 
+                tocolor(255, 255, 255, 255), 0.7, "default", "center", "center")
+            dxDrawText("Távolság: " .. math.floor(npcDist) .. " méter", hintX, hintY + 40, hintX + hintW, hintY + hintH, 
+                tocolor(255, 255, 255, 255), 0.6, "default", "center", "center")
+        end
+    end
+end
+
+-- ==============================
 -- SZÁLLÍTÁS BEFEJEZÉSE
 -- ==============================
 function completeDelivery()
@@ -472,108 +803,6 @@ addEventHandler("onClientMarkerHit", root, function(player, matchingDimension)
 end)
 
 -- ==============================
--- GUI VEZÉRLÉS
--- ==============================
-local showPanel = false
-local wasMousePressed = false
-
-function showTruckSelectionPanel()
-    showPanel = true
-    truckingJob.active = true
-    showCursor(true)
-end
-
-function hideTruckSelectionPanel()
-    showPanel = false
-    showCursor(false)
-end
-
-function isMouseInPosition(x, y, width, height)
-    if not isCursorShowing() then return false end
-    local cx, cy = getCursorPosition()
-    cx, cy = cx * screenWidth, cy * screenHeight
-    return cx >= x and cx <= x + width and cy >= y and cy <= y + height
-end
-
--- ==============================
--- SEGÉD FUNKCIÓK
--- ==============================
-function formatNumber(num)
-    local formatted = tostring(num)
-    local k
-    while true do
-        formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
-        if k == 0 then break end
-    end
-    return formatted
-end
-
--- ==============================
--- RENDERELÉS
--- ==============================
-addEventHandler("onClientRender", root, function()
-    if showPanel then
-        drawTruckSelectionPanel()
-    end
-    
-    drawLoadingProgress()
-    
-    -- Mouse pressed state reset
-    if not getKeyState("mouse1") then
-        wasMousePressed = false
-    end
-end)
-
--- ==============================
--- 3D SZÖVEGEK ÉS KOMMUNIKÁCIÓ
--- ==============================
-addEventHandler("onClientRender", root, function()
-    local playerX, playerY, playerZ = getElementPosition(localPlayer)
-    
-    -- NPC kommunikáció és interakció
-    local npcDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, jobLocations.npc.x, jobLocations.npc.y, jobLocations.npc.z)
-    if npcDist < 15 then
-        -- NPC neve és alapinfó
-        dxDrawText3D("👨‍💼 TEJSZÁLLÍTÓ FŐNÖK\n💼 Kattints rám a munkához!", 
-            jobLocations.npc.x, jobLocations.npc.y, jobLocations.npc.z + 1.2, 15, tocolor(10, 126, 18, 255))
-        
-        -- Folyamatos beszélgetés
-        if currentDialogue ~= "" and npcDist < 8 then
-            dxDrawText3D("💬 \"" .. currentDialogue .. "\"", 
-                jobLocations.npc.x, jobLocations.npc.y, jobLocations.npc.z + 2.0, 12, tocolor(255, 255, 255, 255))
-        end
-    end
-    
-    -- Felrakodó hely szöveg
-    if truckingJob.stage == "selected" then
-        local loadDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, jobLocations.loading.x, jobLocations.loading.y, jobLocations.loading.z)
-        if loadDist < 15 then
-            dxDrawText3D("📦 FELRAKODÓ RAKTÁR\n🥛 Hajts ide a kamionnal", 
-                jobLocations.loading.x, jobLocations.loading.y, jobLocations.loading.z + 1.5, 20, tocolor(255, 165, 0, 255))
-        end
-    end
-    
-    -- Szállítási hely szöveg
-    if truckingJob.stage == "delivering" then
-        local deliveryDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, jobLocations.delivery.x, jobLocations.delivery.y, jobLocations.delivery.z)
-        if deliveryDist < 15 then
-            dxDrawText3D("🏪 CÉLÁLLOMÁS\n💰 Szállítsd le a tejeket", 
-                jobLocations.delivery.x, jobLocations.delivery.y, jobLocations.delivery.z + 1.5, 20, tocolor(255, 50, 50, 255))
-        end
-    end
-    
-    -- Kamion helyzet mutatása
-    if truckingJob.currentTruck and isElement(truckingJob.currentTruck) and truckingJob.stage == "selected" then
-        local truckX, truckY, truckZ = getElementPosition(truckingJob.currentTruck)
-        local truckDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, truckX, truckY, truckZ)
-        if truckDist < 15 then
-            dxDrawText3D("🚛 KAMIONOD\n🔑 Szállj be!", 
-                truckX, truckY, truckZ + 1.5, 15, tocolor(255, 255, 0, 255))
-        end
-    end
-end)
-
--- ==============================
 -- 3D SZÖVEG RAJZOLÓ FÜGGVÉNY
 -- ==============================
 function dxDrawText3D(text, x, y, z, distance, color)
@@ -586,5 +815,29 @@ function dxDrawText3D(text, x, y, z, distance, color)
             local scale = 1 - (dist / distance)
             dxDrawText(text, screenX, screenY, screenX, screenY, color, scale, "default-bold", "center", "center", false, false, true)
         end
+    end
+end
+
+-- ==============================
+-- JÁRMŰ BESZÁLLÁS ELLENŐRZÉS (ENTER BILLENTYŰ)
+-- ==============================
+function checkVehicleEntry()
+    if truckingJob.currentTruck and isElement(truckingJob.currentTruck) then
+        local playerX, playerY, playerZ = getElementPosition(localPlayer)
+        local truckX, truckY, truckZ = getElementPosition(truckingJob.currentTruck)
+        local truckDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, truckX, truckY, truckZ)
+        
+        if truckDist < 5 then
+            if not isPedInVehicle(localPlayer) then
+                outputChatBox("🚛 Beszállás a kamionba...", 10, 126, 18)
+                warpPedIntoVehicle(localPlayer, truckingJob.currentTruck)
+            else
+                outputChatBox("💡 Már a kamionban vagy!", 255, 255, 0)
+            end
+        else
+            outputChatBox("❌ Túl messze vagy a kamiontól! (Jelenleg: " .. math.floor(truckDist) .. " méter)", 255, 100, 100)
+        end
+    else
+        outputChatBox("❌ Nincs aktív kamionod!", 255, 100, 100)
     end
 end 

@@ -283,3 +283,40 @@
 [2025-06-14 12:48:57] Modern Roleplay HUD szerver oldali rendszer betöltve!
 [2025-06-14 12:48:57] INFO: [TRUCKING] Kamionos munka szerver oldal betöltve!
 [2025-06-14 12:48:57] modern-hud restarted successfully
+[2025-06-14 12:54:19] restart: Requested by Console
+[2025-06-14 12:54:19] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:54:19] Stopping modern-hud
+[2025-06-14 12:54:19] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:54:19] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:54:19] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:54:19] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:54:19] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:54:19] Starting modern-hud
+[2025-06-14 12:54:19] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:54:19] INFO: [TRUCKING] Kamionos munka szerver oldal betöltve!
+[2025-06-14 12:54:19] modern-hud restarted successfully
+[2025-06-14 12:59:02] restart: Requested by Console
+[2025-06-14 12:59:02] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:59:02] Stopping modern-hud
+[2025-06-14 12:59:02] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:59:02] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:59:02] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater before Tuesday.
+[2025-06-14 12:59:02] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:59:02] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:59:02] Starting modern-hud
+[2025-06-14 12:59:02] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:59:02] INFO: [TRUCKING] Kamionos munka szerver oldal betöltve!
+[2025-06-14 12:59:02] modern-hud restarted successfully
+[2025-06-14 13:08:06] QUIT: Stefan left the game [Quit] 
+[2025-06-14 13:10:35] restart: Requested by Console
+[2025-06-14 13:10:35] restart: Resource 'modern-hud' restarting...
+[2025-06-14 13:10:35] Stopping modern-hud
+[2025-06-14 13:10:35] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 13:10:35] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 13:10:35] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 13:10:35] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 13:10:35] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 13:10:35] Starting modern-hud
+[2025-06-14 13:10:35] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 13:10:35] INFO: [TRUCKING] Kamionos munka szerver oldal betöltve!
+[2025-06-14 13:10:35] modern-hud restarted successfully
