@@ -1,0 +1,31 @@
+<meta>
+    <info author="Roleplay Mod" version="1.0" name="Modern HUD" description="Modern Roleplay HUD System with Trucking Jobs" />
+    
+    <!-- Client fájlok -->
+    <script src="client/hud_client.lua" type="client" />
+    <script src="client/speedometer.lua" type="client" />
+    <script src="client/minimap.lua" type="client" />
+    <script src="client/trucking_job.lua" type="client" />
+    
+    <!-- Szerver fájlok -->
+    <script src="server/hud_server.lua" type="server" />
+    <script src="server/trucking_server.lua" type="server" />
+    
+    <!-- HTML/CSS/JS fájlok -->
+    <file src="html/hud.html" />
+    <file src="html/hud.css" />
+    <file src="html/hud.js" />
+    
+    <!-- Jogosultságok -->
+    <aclrequest>
+        <right name="general.http" access="true" />
+        <right name="function.setPlayerHudComponentVisible" access="true" />
+        <right name="function.xmlLoadFile" access="true" />
+        <right name="function.xmlSaveFile" access="true" />
+        <right name="function.createPed" access="true" />
+        <right name="function.createVehicle" access="true" />
+        <right name="function.createMarker" access="true" />
+        <right name="function.createBlip" access="true" />
+        <right name="function.givePlayerMoney" access="true" />
+    </aclrequest>
+</meta> 

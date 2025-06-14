@@ -1,0 +1,285 @@
+==================================================================
+= Multi Theft Auto: San Andreas v1.6
+==================================================================
+= Server name      : Default MTA Server
+= Server IP address: auto
+= Server port      : 22003
+= 
+= Log file         : .. 1.6/server/mods/deathmatch/logs/server.log
+= Maximum players  : 32
+= HTTP port        : 22005
+= Voice Chat       : Disabled
+= Bandwidth saving : Medium
+==================================================================
+[2025-06-13 21:31:45] File 'settings.xml' not present, creating new node.
+[2025-06-13 21:31:49] Resource 'runcode' requests some acl rights. Use the command 'aclrequest list runcode'
+[2025-06-13 21:31:49] Resources: 200 loaded, 0 failed
+[2025-06-13 21:31:50] Starting resources...
+[2025-06-13 21:31:50] Admin access list successfully updated 
+[2025-06-13 21:31:50] INFO: Admin added 570 missing rights
+[2025-06-13 21:31:50] Server minclientversion is now 1.5.9-9.20957.0
+[2025-06-13 21:31:50] Server minclientversion is now 1.6.0-9.22676
+[2025-06-13 21:31:50] INFO: ===============================================================================
+[2025-06-13 21:31:50] INFO:  MTA:SA HANDLING EDITOR [hedit.github.io]
+[2025-06-13 21:31:50] Gamemode 'play' started.
+[2025-06-13 21:31:50] Querying MTA master server... success! (Auto detected IP:83.215.178.123)
+[2025-06-13 21:31:50] Authorized serial account protection is enabled for the ACL group(s): `Admin`  See http://multitheftauto.com/authserial
+[2025-06-13 21:31:50] WARNING: <owner_email_address> not set
+[2025-06-13 21:31:50] Server started and is ready to accept connections!
+[2025-06-13 21:31:50] To stop the server, type 'shutdown' or press Ctrl-C
+[2025-06-13 21:31:50] Type 'help' for a list of commands.
+[2025-06-13 21:31:56] INFO: ===============================================================================
+[2025-06-13 21:32:22] Server minclientversion is now 1.6.0-9.23088.0
+[2025-06-13 21:32:22] CONNECT: Stefan connected (IP: 192.168.0.22  Serial: 933AA2E0927EAA9CF2EF62F93C912584  Version: 1.6.0-9.23196.0)
+[2025-06-13 21:32:23] JOIN: Stefan joined the game (IP: 192.168.0.22)
+[2025-06-13 21:55:32] QUIT: Stefan left the game [Quit] 
+[2025-06-14 11:09:40] CONNECT: Stefan connected (IP: 192.168.0.22  Serial: 933AA2E0927EAA9CF2EF62F93C912584  Version: 1.6.0-9.23196.0)
+[2025-06-14 11:09:40] JOIN: Stefan joined the game (IP: 192.168.0.22)
+[2025-06-14 11:10:51] QUIT: Stefan left the game [Quit] 
+[2025-06-14 11:29:42] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 11:29:42] ERROR: Couldn't find file(s) images/health_icon.png for resource modern-hud
+[2025-06-14 11:29:42] Loading of resource 'modern-hud' failed
+[2025-06-14 11:29:42] ERROR: Problem with resource: modern-hud; Couldn't find file(s) images/health_icon.png for resource modern-hud
+[2025-06-14 11:29:42] Resources: 200 loaded, 1 failed
+[2025-06-14 11:29:54] start: Requested by Console
+[2025-06-14 11:29:54] start: Resource 'modern-hud' is loaded, but has errors (Couldn't find file(s) images/health_icon.png for resource modern-hud)
+[2025-06-14 11:30:56] stop: Requested by Console
+[2025-06-14 11:30:56] stop: Resource 'modern-hud' is loaded, but has errors (Couldn't find file(s) images/health_icon.png for resource modern-hud)
+[2025-06-14 11:31:05] Resource 'modern-hud' changed, reloading
+[2025-06-14 11:31:05] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 11:31:05] New resource 'modern-hud' loaded
+[2025-06-14 11:31:05] Resources: 201 loaded, 0 failed
+[2025-06-14 11:31:10] start: Requested by Console
+[2025-06-14 11:31:10] Starting modern-hud
+[2025-06-14 11:31:10] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 11:31:10] start: Resource 'modern-hud' started
+[2025-06-14 11:31:19] CONNECT: Stefan connected (IP: 192.168.0.22  Serial: 933AA2E0927EAA9CF2EF62F93C912584  Version: 1.6.0-9.23196.0)
+[2025-06-14 11:31:19] JOIN: Stefan joined the game (IP: 192.168.0.22)
+[2025-06-14 11:36:10] Játékos adatok mentve: Stefan | Pénz: $5000 | Szint: 1 | Munka: civilian
+[2025-06-14 11:41:10] Játékos adatok mentve: Stefan | Pénz: $5000 | Szint: 1 | Munka: civilian
+[2025-06-14 11:42:56] restart: Requested by Console
+[2025-06-14 11:42:56] restart: Resource 'modern-huf' could not be found
+[2025-06-14 11:43:05] restart: Requested by Console
+[2025-06-14 11:43:05] restart: Resource 'modern-hud' restarting...
+[2025-06-14 11:43:05] Stopping modern-hud
+[2025-06-14 11:43:05] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 11:43:05] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 11:43:05] Starting modern-hud
+[2025-06-14 11:43:05] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 11:43:05] modern-hud restarted successfully
+[2025-06-14 11:52:06] restart: Requested by Console
+[2025-06-14 11:52:06] restart: Resource 'modern-hud' restarting...
+[2025-06-14 11:52:06] Stopping modern-hud
+[2025-06-14 11:52:06] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 11:52:06] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 11:52:06] Starting modern-hud
+[2025-06-14 11:52:06] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 11:52:06] modern-hud restarted successfully
+[2025-06-14 11:53:17] restart: Requested by Console
+[2025-06-14 11:53:17] restart: Resource 'modern-hud' restarting...
+[2025-06-14 11:53:17] Stopping modern-hud
+[2025-06-14 11:53:17] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 11:53:17] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 11:53:17] Starting modern-hud
+[2025-06-14 11:53:17] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 11:53:17] modern-hud restarted successfully
+[2025-06-14 12:05:44] restart: Requested by Console
+[2025-06-14 12:05:44] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:05:44] Stopping modern-hud
+[2025-06-14 12:05:44] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:05:44] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:05:44] WARNING: modern-hud/client/hud_client.lua(Line 107) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:05:44] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:05:44] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:05:44] Starting modern-hud
+[2025-06-14 12:05:44] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:05:44] modern-hud restarted successfully
+[2025-06-14 12:12:43] restart: Requested by Console
+[2025-06-14 12:12:43] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:12:43] Stopping modern-hud
+[2025-06-14 12:12:43] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:12:43] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:12:43] WARNING: modern-hud/client/hud_client.lua(Line 94) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:12:43] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:12:43] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:12:43] Starting modern-hud
+[2025-06-14 12:12:43] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:12:43] modern-hud restarted successfully
+[2025-06-14 12:18:21] restart: Requested by Console
+[2025-06-14 12:18:21] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:18:21] Stopping modern-hud
+[2025-06-14 12:18:21] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:18:21] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:18:21] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:18:21] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:18:21] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:18:21] Starting modern-hud
+[2025-06-14 12:18:21] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:18:21] modern-hud restarted successfully
+[2025-06-14 12:21:12] restart: Requested by Console
+[2025-06-14 12:21:12] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:21:12] Stopping modern-hud
+[2025-06-14 12:21:12] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:21:12] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:21:12] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:21:12] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:21:12] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:21:12] Starting modern-hud
+[2025-06-14 12:21:12] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:21:12] modern-hud restarted successfully
+[2025-06-14 12:21:37] restart: Requested by Console
+[2025-06-14 12:21:37] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:21:37] Stopping modern-hud
+[2025-06-14 12:21:37] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:21:37] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:21:37] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:21:37] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:21:37] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:21:37] Starting modern-hud
+[2025-06-14 12:21:37] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:21:37] modern-hud restarted successfully
+[2025-06-14 12:22:08] restart: Requested by Console
+[2025-06-14 12:22:08] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:22:08] Stopping modern-hud
+[2025-06-14 12:22:08] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:22:08] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:22:08] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:22:08] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:22:08] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:22:08] Starting modern-hud
+[2025-06-14 12:22:08] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:22:08] modern-hud restarted successfully
+[2025-06-14 12:22:26] restart: Requested by Console
+[2025-06-14 12:22:26] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:22:26] Stopping modern-hud
+[2025-06-14 12:22:26] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:22:26] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:22:26] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:22:26] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:22:26] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:22:26] Starting modern-hud
+[2025-06-14 12:22:26] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:22:26] modern-hud restarted successfully
+[2025-06-14 12:22:43] restart: Requested by Console
+[2025-06-14 12:22:43] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:22:43] Stopping modern-hud
+[2025-06-14 12:22:43] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:22:43] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:22:43] WARNING: modern-hud/client/hud_client.lua(Line 103) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:22:43] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:22:43] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:22:43] Starting modern-hud
+[2025-06-14 12:22:43] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:22:43] modern-hud restarted successfully
+[2025-06-14 12:23:13] restart: Requested by Console
+[2025-06-14 12:23:13] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:23:13] Stopping modern-hud
+[2025-06-14 12:23:13] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:23:13] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:23:13] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:23:13] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:23:13] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:23:13] Starting modern-hud
+[2025-06-14 12:23:13] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:23:13] modern-hud restarted successfully
+[2025-06-14 12:23:27] restart: Requested by Console
+[2025-06-14 12:23:27] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:23:27] Stopping modern-hud
+[2025-06-14 12:23:27] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:23:27] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:23:27] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater before Tuesday.
+[2025-06-14 12:23:27] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:23:27] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:23:27] Starting modern-hud
+[2025-06-14 12:23:27] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:23:27] modern-hud restarted successfully
+[2025-06-14 12:23:52] restart: Requested by Console
+[2025-06-14 12:23:52] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:23:52] Stopping modern-hud
+[2025-06-14 12:23:52] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:23:52] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:23:52] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater before Tuesday.
+[2025-06-14 12:23:52] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:23:52] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:23:52] Starting modern-hud
+[2025-06-14 12:23:52] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:23:52] modern-hud restarted successfully
+[2025-06-14 12:24:18] restart: Requested by Console
+[2025-06-14 12:24:18] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:24:18] Stopping modern-hud
+[2025-06-14 12:24:18] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:24:18] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:24:18] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater before Tuesday.
+[2025-06-14 12:24:18] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:24:18] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:24:18] Starting modern-hud
+[2025-06-14 12:24:18] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:24:18] modern-hud restarted successfully
+[2025-06-14 12:24:58] restart: Requested by Console
+[2025-06-14 12:24:58] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:24:58] Stopping modern-hud
+[2025-06-14 12:24:58] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:24:58] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:24:58] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:24:58] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:24:58] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:24:58] Starting modern-hud
+[2025-06-14 12:24:58] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:24:58] modern-hud restarted successfully
+[2025-06-14 12:25:19] restart: Requested by Console
+[2025-06-14 12:25:19] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:25:19] Stopping modern-hud
+[2025-06-14 12:25:19] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:25:19] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:25:19] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:25:19] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:25:19] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:25:19] Starting modern-hud
+[2025-06-14 12:25:19] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:25:19] modern-hud restarted successfully
+[2025-06-14 12:25:51] restart: Requested by Console
+[2025-06-14 12:25:51] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:25:51] Stopping modern-hud
+[2025-06-14 12:25:51] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:25:51] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:25:51] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:25:51] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:25:51] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:25:51] Starting modern-hud
+[2025-06-14 12:25:51] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:25:51] modern-hud restarted successfully
+[2025-06-14 12:38:57] restart: Requested by Console
+[2025-06-14 12:38:57] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:38:57] Stopping modern-hud
+[2025-06-14 12:38:57] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:38:57] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:38:57] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:38:57] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:38:57] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:38:57] Starting modern-hud
+[2025-06-14 12:38:57] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:38:57] INFO: [TRUCKING] Kamionos munka szerver oldal betöltve!
+[2025-06-14 12:38:57] modern-hud restarted successfully
+[2025-06-14 12:38:59] QUIT: Stefan left the game [Quit] 
+[2025-06-14 12:39:46] CONNECT: Stefan connected (IP: 192.168.0.22  Serial: 933AA2E0927EAA9CF2EF62F93C912584  Version: 1.6.0-9.23196.0)
+[2025-06-14 12:39:48] JOIN: Stefan joined the game (IP: 192.168.0.22)
+[2025-06-14 12:43:06] ACL: Denied 'Stefan' access to command 'restart'
+[2025-06-14 12:43:18] restart: Requested by Console
+[2025-06-14 12:43:18] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:43:18] Stopping modern-hud
+[2025-06-14 12:43:18] Starting modern-hud
+[2025-06-14 12:43:18] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:43:18] INFO: [TRUCKING] Kamionos munka szerver oldal betöltve!
+[2025-06-14 12:43:18] modern-hud restarted successfully
+[2025-06-14 12:48:57] restart: Requested by Console
+[2025-06-14 12:48:57] restart: Resource 'modern-hud' restarting...
+[2025-06-14 12:48:57] Stopping modern-hud
+[2025-06-14 12:48:57] Resource 'modern-hud' changed, reloading and starting
+[2025-06-14 12:48:57] Resource 'modern-hud' requests some acl rights. Use the command 'aclrequest list modern-hud'
+[2025-06-14 12:48:57] WARNING: modern-hud/client/hud_client.lua(Line 102) [Client] isPedInWater is deprecated and may not work in future versions. Please replace with isElementInWater.
+[2025-06-14 12:48:57] Some files in 'modern-hud' use deprecated functions.
+[2025-06-14 12:48:57] Use the 'upgrade' command to perform a basic upgrade of resources.
+[2025-06-14 12:48:57] Starting modern-hud
+[2025-06-14 12:48:57] Modern Roleplay HUD szerver oldali rendszer betöltve!
+[2025-06-14 12:48:57] INFO: [TRUCKING] Kamionos munka szerver oldal betöltve!
+[2025-06-14 12:48:57] modern-hud restarted successfully

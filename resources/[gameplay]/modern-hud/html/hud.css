@@ -1,0 +1,394 @@
+/* ==============================
+   MODERN HUD CSS STÍLUSOK
+   ============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background: transparent;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* ==============================
+   NOTIFIKÁCIÓK
+   ============================== */
+
+#notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notification {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 20, 0.95));
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 15px 20px;
+    color: white;
+    min-width: 300px;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transform: translateX(100%);
+    animation: slideInRight 0.5s ease-out forwards;
+}
+
+.notification.success {
+    border-color: rgba(0, 255, 0, 0.5);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+}
+
+.notification.error {
+    border-color: rgba(255, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+}
+
+.notification.warning {
+    border-color: rgba(255, 255, 0, 0.5);
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.2);
+}
+
+.notification.info {
+    border-color: rgba(0, 150, 255, 0.5);
+    box-shadow: 0 0 20px rgba(0, 150, 255, 0.2);
+}
+
+.notification-header {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.notification-content {
+    font-size: 13px;
+    line-height: 1.4;
+    opacity: 0.9;
+}
+
+/* ==============================
+   SZINTLÉPÉS ANIMÁCIÓ
+   ============================== */
+
+#level-up-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+    transition: all 0.5s ease;
+}
+
+#level-up-container.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -50%) scale(0.5);
+}
+
+.level-up-content {
+    background: linear-gradient(135deg, 
+        rgba(255, 215, 0, 0.95), 
+        rgba(255, 140, 0, 0.95));
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 40px 60px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4);
+    animation: levelUpPulse 2s infinite alternate;
+}
+
+.level-up-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+    animation: bounce 1s infinite;
+}
+
+.level-up-text h2 {
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.level-up-text p {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 5px 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ==============================
+   PÉNZ VÁLTOZÁS ANIMÁCIÓK
+   ============================== */
+
+#money-change-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.money-change {
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    animation: moneyFade 3s ease-out forwards;
+    transform: translateX(100%);
+}
+
+.money-change.positive {
+    background: linear-gradient(90deg, rgba(0, 255, 0, 0.8), rgba(0, 200, 0, 0.9));
+    color: white;
+    animation: moneySlideInPositive 3s ease-out forwards;
+}
+
+.money-change.negative {
+    background: linear-gradient(90deg, rgba(255, 0, 0, 0.8), rgba(200, 0, 0, 0.9));
+    color: white;
+    animation: moneySlideInNegative 3s ease-out forwards;
+}
+
+/* ==============================
+   TAPASZTALAT ANIMÁCIÓK
+   ============================== */
+
+#experience-container {
+    position: fixed;
+    bottom: 150px;
+    right: 20px;
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.experience-change {
+    background: linear-gradient(90deg, rgba(255, 255, 0, 0.8), rgba(255, 165, 0, 0.9));
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    animation: experienceFade 3s ease-out forwards;
+    transform: translateX(100%);
+}
+
+/* ==============================
+   EREDMÉNYEK
+   ============================== */
+
+#achievement-container {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    z-index: 1800;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.achievement {
+    background: linear-gradient(135deg, 
+        rgba(138, 43, 226, 0.95), 
+        rgba(75, 0, 130, 0.95));
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    min-width: 350px;
+    box-shadow: 0 10px 40px rgba(138, 43, 226, 0.3);
+    animation: achievementSlideIn 0.8s ease-out forwards;
+    transform: translateX(-100%);
+}
+
+.achievement-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.achievement-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.achievement-description {
+    font-size: 14px;
+    text-align: center;
+    opacity: 0.9;
+}
+
+/* ==============================
+   ANIMÁCIÓK
+   ============================== */
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes levelUpPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4);
+    }
+    100% {
+        transform: scale(1.05);
+        box-shadow: 0 25px 70px rgba(255, 215, 0, 0.6);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes moneySlideInPositive {
+    0% {
+        transform: translateX(100%) scale(0.8);
+        opacity: 0;
+    }
+    20% {
+        transform: translateX(0) scale(1.2);
+        opacity: 1;
+    }
+    40% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes moneySlideInNegative {
+    0% {
+        transform: translateX(100%) scale(0.8);
+        opacity: 0;
+    }
+    20% {
+        transform: translateX(0) scale(1.2);
+        opacity: 1;
+    }
+    40% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes experienceFade {
+    0% {
+        transform: translateX(100%) translateY(20px);
+        opacity: 0;
+    }
+    20% {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0) translateY(-30px);
+        opacity: 0;
+    }
+}
+
+@keyframes achievementSlideIn {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* ==============================
+   RESZPONZÍV DIZÁJN
+   ============================== */
+
+@media (max-width: 768px) {
+    .notification {
+        min-width: 250px;
+        max-width: 300px;
+        padding: 12px 16px;
+    }
+    
+    .level-up-content {
+        padding: 30px 40px;
+    }
+    
+    .level-up-text h2 {
+        font-size: 24px;
+    }
+    
+    .achievement {
+        min-width: 280px;
+        padding: 15px;
+    }
+}
+
+/* ==============================
+   SEGÉDOSZTÁLYOK
+   ============================== */
+
+.hidden {
+    display: none !important;
+}
+
+.fade-out {
+    animation: fadeOut 0.5s ease-out forwards;
+} 
