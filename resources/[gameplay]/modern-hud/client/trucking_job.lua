@@ -158,8 +158,7 @@ function checkNPCInteraction()
         local truckDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, truckX, truckY, truckZ)
         
         if truckDist < 5 and not isPedInVehicle(localPlayer) then
-            outputChatBox("🚛 Beszállás a kamionba...", 10, 126, 18)
-            warpPedIntoVehicle(localPlayer, truckingJob.currentTruck)
+            attemptVehicleEntry()
             return
         end
     end
@@ -829,8 +828,7 @@ function checkVehicleEntry()
         
         if truckDist < 5 then
             if not isPedInVehicle(localPlayer) then
-                outputChatBox("🚛 Beszállás a kamionba...", 10, 126, 18)
-                warpPedIntoVehicle(localPlayer, truckingJob.currentTruck)
+                attemptVehicleEntry()
             else
                 outputChatBox("💡 Már a kamionban vagy!", 255, 255, 0)
             end
@@ -840,4 +838,55 @@ function checkVehicleEntry()
     else
         outputChatBox("❌ Nincs aktív kamionod!", 255, 100, 100)
     end
-end 
+end
+
+-- ==============================
+-- BIZTONSÁGOS BESZÁLLÁS PRÓBÁLKOZÁS
+-- ==============================
+function attemptVehicleEntry()
+    if not (truckingJob.currentTruck and isElement(truckingJob.currentTruck)) then
+        outputChatBox("❌ Nincs aktív kamionod!", 255, 100, 100)
+        return
+    end
+
+    local playerX, playerY, playerZ = getElementPosition(localPlayer)
+    local truckX, truckY, truckZ = getElementPosition(truckingJob.currentTruck)
+    local truckDist = getDistanceBetweenPoints3D(playerX, playerY, playerZ, truckX, truckY, truckZ)
+
+    if truckDist > 5 then
+        outputChatBox("❌ Túl messze vagy a kamiontól! (Jelenleg: " .. math.floor(truckDist) .. " méter)", 255, 100, 100)
+        return
+    end
+
+    local attempts = 0
+    local function tryWarp()
+        if isPedInVehicle(localPlayer) then return end
+        attempts = attempts + 1
+
+        if attempts == 1 then
+            warpPedIntoVehicle(localPlayer, truckingJob.currentTruck)
+        elseif attempts == 2 then
+            outputChatBox("🔄 Próbálkozás 2. módszerrel...", 255, 215, 0)
+            warpPedIntoVehicle(localPlayer, truckingJob.currentTruck, 0)
+        elseif attempts == 3 then
+            outputChatBox("🔄 Próbálkozás 3. módszerrel...", 255, 215, 0)
+            warpPedIntoVehicle(localPlayer, truckingJob.currentTruck, 1)
+        else
+            outputChatBox("🔄 Kamion újrapozicionálása...", 255, 215, 0)
+            local px, py, pz = getElementPosition(localPlayer)
+            setElementPosition(truckingJob.currentTruck, px + 2, py, pz)
+            outputChatBox("🚚 Kamion újrapozicionálva! Próbáld újra az F vagy ENTER billentyűt!", 10, 126, 18)
+            outputChatBox("❌ Sajnos nem sikerült a beszállás. Próbáld manuálisan!", 255, 100, 100)
+            outputChatBox("💡 Vagy menj közelebb és próbáld az F/ENTER billentyűt!", 255, 165, 0)
+            return
+        end
+
+        setTimer(function()
+            if not isPedInVehicle(localPlayer) then
+                tryWarp()
+            end
+        end, 500, 1)
+    end
+
+    tryWarp()
+end
